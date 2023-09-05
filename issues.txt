@@ -32,3 +32,6 @@ street : 69
 gorpcore : 74
 [45820:47692:0905/210525.302:ERROR:device_event_log_impl.cc(222)] [21:05:25.302] USB: usb_service_win.cc:415 Could not read device interface GUIDs: 지정된 파일을 찾을 수 없습니다. (0x2)
 gorpcore : 75
+
+
+no set dandy-female
