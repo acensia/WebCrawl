@@ -6,31 +6,72 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import requests as rq
 import os
-from crawl import get_imgs
+from get_img import get_imgs
 
-# Initialize the driver
-driver = webdriver.Chrome()
 
-total_sets = 0
-page = 1
-
-os.makedirs("./casual", exist_ok=True)
-
-while total_sets < 3:
-    driver.get(f"https://www.musinsa.com/app/codimap/lists?style_type=casual&tag_no=&brand=&display_cnt=60&list_kind=big&sort=date&page={page}")
+styles = ["casual", "formal", "sports", "street", "gorpcore", "dandy"]
+def crawl_style(style, base_path):
     
+    # Initialize the driver
+    driver = webdriver.Chrome()
     
-    image_thumbnails = driver.find_elements(By.XPATH, '//div[@class="style-list-thumbnail"]/img')
-    for th in image_thumbnails:
-        os.makedirs(f"./casual/{total_sets}", exist_ok=True)
-        th.click()
-        time.sleep(0.5)
-        get_imgs(driver, f"./casual/{total_sets}")
+    os.makedirs(f"{base_path}/{style}", exist_ok=True)
+    os.makedirs(f"{base_path}/{style}/male", exist_ok=True)
+    os.makedirs(f"{base_path}/{style}/female", exist_ok=True)
+    page = 1
+    total_sets = 0
+    while total_sets < 200:
+        driver.get(f"https://www.musinsa.com/app/codimap/lists?style_type={style}&tag_no=&brand=&display_cnt=60&list_kind=big&sort=date&page={page}")
+        btns = driver.find_elements(By.XPATH, '//div[@class="sc-pvystx-0 iRAZYo"]/button')
+        driver.execute_script("arguments[0].click();", btns[1])
         
-        driver.back()
-        time.sleep(0.5)
-        total_sets += 1
+        image_thumbnails = driver.find_elements(By.XPATH, '//div[@class="style-list-thumbnail"]/img')
+        for th in image_thumbnails:
+            print(f"{style} : {total_sets}")
+            os.makedirs(f"{base_path}/{style}/male/{total_sets}", exist_ok=True)
+            driver.execute_script("arguments[0].click();", th)
+            time.sleep(0.3)
+            get_imgs(driver, f"{base_path}/{style}/male/{total_sets}")
+            
+            driver.back()
+            time.sleep(0.3)
+            total_sets += 1
+            if total_sets == 200:
+                break
+            
+        page += 1
+
+    page = 1
+    total_sets = 0        
     
-    page += 1 
+    while total_sets < 200:
+        driver.get(f"https://www.musinsa.com/app/codimap/lists?style_type={style}&tag_no=&brand=&display_cnt=60&list_kind=big&sort=date&page={page}")
+        btns = driver.find_elements(By.XPATH, '//div[@class="sc-pvystx-0 iRAZYo"]/button')
+        driver.execute_script("arguments[0].click();", btns[2])
+        
+        image_thumbnails = driver.find_elements(By.XPATH, '//div[@class="style-list-thumbnail"]/img')
+        for th in image_thumbnails:
+            print(f"{style} : {total_sets}")
+            os.makedirs(f"./shown/{style}/female/{total_sets}", exist_ok=True)
+            driver.execute_script("arguments[0].click();", th)
+            time.sleep(0.3)
+            get_imgs(driver, f"./shown/{style}/female/{total_sets}")
+            
+            driver.back()
+            time.sleep(0.3)
+            total_sets += 1
+            if total_sets == 200:
+                break
+            
+        page += 1  
+        
+    driver.quit()
     
-driver.quit()
+if __name__ == "__main__":
+    
+    base_path = "./gendered"
+    os.makedirs(base_path, exist_ok=True)
+    
+    for st in styles:
+        crawl_style(st, base_path)
+        print(f"{st} completed")

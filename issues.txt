@@ -1,0 +1,34 @@
+error on casual 73 ~ 74:
+[14220:41880:0905/193848.356:ERROR:device_event_log_impl.cc(222)] [19:38:48.355] USB: usb_service_win.cc:415 Could not read device interface GUIDs: 지정된 파일을 찾을 수 없습니다. (0x2)
+
+error on formal 70 ~ 71:
+formal : 70
+[38192:46668:0905/195441.143:ERROR:device_event_log_impl.cc(222)] [19:54:41.142] USB: usb_service_win.cc:415 Could not read device interface GUIDs: 지정된 파일을 찾을 수 없습니다. (0x2)
+formal : 71
+
+
+//restart - new issue
+
+casual : 71
+[47656:37824:0905/202826.172:ERROR:device_event_log_impl.cc(222)] [20:28:26.171] USB: usb_service_win.cc:415 Could not read device interface GUIDs: 지정된 파일을 찾을 수 없습니다. (0x2)
+casual : 72
+
+formal : 73
+[3272:46240:0905/203717.999:ERROR:device_event_log_impl.cc(222)] [20:37:18.001] USB: usb_service_win.cc:415 Could not read device interface GUIDs: 지정
+된 파일을 찾을 수 없습니다. (0x2)
+formal : 74
+
+stopped on sports 3
+
+sports : 71
+[31892:46460:0905/204716.428:ERROR:device_event_log_impl.cc(222)] [20:47:16.425] USB: usb_service_win.cc:415 Could not read device interface GUIDs: 지정된 파일을 찾을 수 없습니다. (0x2)
+sports : 72
+
+street : 68
+[46752:16652:0905/205607.712:ERROR:device_event_log_impl.cc(222)] [20:56:07.724] USB: usb_service_win.cc:415 Could not read device interface GUIDs: 지정된 파일을 찾을 수 없습니다. (0x2)
+street : 69
+
+
+gorpcore : 74
+[45820:47692:0905/210525.302:ERROR:device_event_log_impl.cc(222)] [21:05:25.302] USB: usb_service_win.cc:415 Could not read device interface GUIDs: 지정된 파일을 찾을 수 없습니다. (0x2)
+gorpcore : 75
