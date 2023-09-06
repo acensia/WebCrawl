@@ -17,6 +17,7 @@ def get_imgs(driver, save_path):
         file.write(response.content)
 
     img_single = driver.find_elements(By.XPATH, '//a[@class="styling_img"]/img') # get the images of each cloth constructing the set
+    img_links = driver.find_elements(By.XPATH, '//a[@class="styling_img"]') # get the images of each cloth constructing the set
     brand_single = driver.find_elements(By.XPATH, '//a[@class="brand"]') # get the brand of each cloth
     brand_items = driver.find_elements(By.XPATH, '//a[@class="brand_item"]') # get the name of each cloth
     price_items = driver.find_elements(By.XPATH, '//div[@class="price"]') # get the price of each cloth (not completed)
@@ -35,7 +36,11 @@ def get_imgs(driver, save_path):
         item["brand"] = brand_single[i].text
         item["item"] = brand_items[i].text
         item["curr_price"] = price_items[i].text
+        item["link"] = img_links[i].get_attribute('href')
+    
         items.append(item)
+        
+        
     anno["items"] = items
     with open(f"{save_path}/anno.json", 'w', encoding='utf-8') as f:
         json.dump(anno, f, indent=4, ensure_ascii=False)

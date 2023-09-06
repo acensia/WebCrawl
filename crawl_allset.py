@@ -10,7 +10,8 @@ from get_img import get_imgs
 import re
 
 # target styles
-styles = ["casual", "formal", "sports", "street", "gorpcore", "dandy"]
+male_styles = ["casual", "formal", "sports", "street", "gorpcore", "dandy"]
+female_styles = ["casual", "formal", "sports", "street", "romantic", "girlish"]
 
 # gender value 
 def crawl_style(style, base_path, gender):
@@ -18,8 +19,8 @@ def crawl_style(style, base_path, gender):
     # Initialize the driver
     driver = webdriver.Chrome()
     
-    os.makedirs(f"{base_path}/{style}", exist_ok=True)
-    os.makedirs(f"{base_path}/{style}/{gender}", exist_ok=True)
+    os.makedirs(f"{base_path}/{gender}", exist_ok=True)
+    os.makedirs(f"{base_path}/{gender}/{style}", exist_ok=True)
     
     page = 1
     total_sets = 0
@@ -56,12 +57,12 @@ def crawl_style(style, base_path, gender):
         image_thumbnails = driver.find_elements(By.XPATH, '//div[@class="style-list-thumbnail"]/img')
         for th in image_thumbnails:
             print(f"{style} : {total_sets}") # just for monitoring
-            os.makedirs(f"{base_path}/{style}/{gender}/{total_sets}", exist_ok=True)
+            os.makedirs(f"{base_path}/{gender}/{style}/{total_sets}", exist_ok=True)
+            time.sleep(0.5)
             driver.execute_script("arguments[0].click();", th) # get into the page of each set clicking the thumbnail
-            time.sleep(0.3)
-            get_imgs(driver, f"{base_path}/{style}/{gender}/{total_sets}") # call module
+            get_imgs(driver, f"{base_path}/{gender}/{style}/{total_sets}") # call module
             driver.back()
-            time.sleep(0.3)
+            time.sleep(0.5)
             total_sets += 1
             if total_sets == 200:
                 break
@@ -72,9 +73,13 @@ def crawl_style(style, base_path, gender):
     
 if __name__ == "__main__":
     
-    base_path = "./gendered"
+    base_path = "./added"
     os.makedirs(base_path, exist_ok=True)
     
-    for st in styles:
+    for st in male_styles:
         crawl_style(st, base_path, "male")
-        print(f"{st} completed")
+        print(f"male {st} completed")
+        
+    for st in female_styles:
+        crawl_style(st, base_path, "female")
+        print(f"female {st} completed")
