@@ -9,9 +9,6 @@ import os
 from get_img import get_imgs
 import re
 
-# target styles
-male_styles = ["casual", "formal", "sports", "street", "gorpcore", "dandy"]
-female_styles = ["casual", "formal", "sports", "street", "romantic", "girlish"]
 
 # gender value 
 def crawl_style(style, base_path, gender):
@@ -73,7 +70,7 @@ def crawl_style(style, base_path, gender):
     
 if __name__ == "__main__":
     
-    base_path = "./added"
+    base_path = "./only_url"
     os.makedirs(base_path, exist_ok=True)
     
     for st in male_styles:
