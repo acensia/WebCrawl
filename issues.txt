@@ -35,3 +35,8 @@ gorpcore : 75
 
 
 no set dandy-female
+
+
+type > label 형태가 안 되는 모자 발견 (기억안남)
+
+유효하지 않은 상품 발견 (male, formal, 95[2] : 화병작 글로시블랙)
