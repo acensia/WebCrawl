@@ -13,4 +13,5 @@ base_path = "./only_url"
 #     crawl_style(st, base_path, "male")
 #     print(f"male {st} completed")
 
-add_annotation(base_path, "male")
+    
+add_annotation(base_path, "female", chkstyle="casual", chkpnt=137)

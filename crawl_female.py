@@ -14,4 +14,4 @@ base_path = "./only_url"
     
 
     
-add_annotation(base_path, "female")
+add_annotation(base_path, "female", chkstyle="casual", chkpnt=5)
